@@ -1,0 +1,43 @@
+<ion-view title="Tasks" class="image-cover">
+  <ion-nav-buttons side="right">
+    <button class="right button button-icon ion-android-add-circle" ng-click="modal.show()">
+    </button>
+    <button class="right button button-icon ion-arrow-swap" ng-click="data.showReorder = !data.showReorder">
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list can-swipe="true" show-reorder="data.showReorder">
+      <ion-item ng-repeat="task in tasks | orderBy:'target_priority'" task="task" ng-class="{completed: task.completed}" class="item-remove-animate">
+        <div class="row">
+          <div class="col-10">
+            <label class="checkbox-stable">
+              <input type="checkbox" ng-model="task.completed" ng-change="completeTask(task)">
+            </label>
+          </div>
+          <div class="col-90">{{task.name}}</div>
+        </div>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="destroyTask(task)"></ion-option-button>
+        <ion-reorder-button class="ion-navicon" on-reorder="moveTask(task, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <script id="templates/new_list.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">New task</h1>
+        <button class="button button-clear ion-close-round" ng-click="modal.hide()"></button>
+      </ion-header-bar>
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input item-floating-label">
+            <span class="input-label">List name</span>
+            <input type="text" placeholder="Please enter list name" ng-model="task.name">
+          </label>
+        </div>
+        <button class="button button-positive button-full" ng-click="addTask();modal.hide()">
+          Create
+        </button>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>

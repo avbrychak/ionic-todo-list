@@ -1,0 +1,33 @@
+<ion-view title="Lists" class="image-cover">
+  <ion-nav-buttons side="right">
+    <button class="right button button-icon ion-android-add-circle" ng-click="modal.show()">
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list can-swipe="true" class="my-animate">
+      <ion-item ng-repeat="list in lists" ng-href="#/lists/{{list.id}}/tasks">
+        <span ng-click="editList()">{{list.name}}</span>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="destroyList(list)"></ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <script id="templates/new_list.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">New list</h1>
+        <button class="button button-clear ion-close-round" ng-click="modal.hide()"></button>
+      </ion-header-bar>
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input item-floating-label">
+            <span class="input-label">List name</span>
+            <input type="text" placeholder="Please enter list name" ng-model="list.name">
+          </label>
+        </div>
+        <button class="button button-positive button-full" ng-click="addList();modal.hide()">
+          Create
+        </button>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>
